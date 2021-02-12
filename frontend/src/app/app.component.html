@@ -1,0 +1,1174 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+          integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+  </head>
+
+  <body>
+    <!--Navigationbar with subnavigation-->
+    <div class="navbar">
+      <div style="width: 1000px; height:1px;">
+        <img id="title" class="imgfilter" src="assets/images/kctitlebold.png"/>
+        <img id="logo" class="imgfilter" src="assets/images/kclogo.png"/>
+      </div>
+
+      <div style="width: 130px; height:1px;">
+
+      </div>
+
+      <!--Submenu buttons-->
+      <div class="subnav" [ngClass]="{selected: navSelection === 'help'}">
+        <span>
+          <button class="subnavbtn" (click)="nav_help()">
+            Help
+          </button>
+        </span>
+      </div>
+
+      <div class="subnav" [ngClass]="{selected: navSelection === 'how'}">
+        <span>
+          <button class="subnavbtn" (click)="nav_how()">
+            How it works
+          </button>
+        </span>
+      </div>
+
+      <div class="subnav" [ngClass]="{selected: navSelection === 'about'}">
+        <span>
+          <button class="subnavbtn" (click)="nav_about()">
+            About
+          </button>
+        </span>
+      </div>
+    </div>
+
+    <!--Submenu text-->
+    <div *ngIf="navSelection === 'help'" class="infobox">
+      <br/>
+
+      <h1>
+        <strong>Guide</strong>
+      </h1>
+
+      <p style="margin-bottom:0px;"><strong>1.</strong> Select your occasion<br/>
+        <strong>2.</strong> Select the mood you want the AI to generate your card in<br/>
+        <strong>3.</strong> (Optional) Provide some information you want the program to consider<br/>
+        <strong>4.</strong> Select an AI you want to hear additional suggestions from<br/>
+        <strong>5. Enjoy</strong><br/><br/>
+      </p>
+    </div>
+
+    <div *ngIf="navSelection === 'how'" class="infobox">
+      <br/>
+
+      <h1>
+        <strong>Boost your Inspiration </strong>
+      </h1>
+
+      <p style="margin-right:50px; margin-left:50px;">
+        As we experienced ourselves that it is can be very hard to write unusual and surprising greeting cards.<br/>
+        We decided to combine the classic approach of writing with text-generating neuronal networks.<br/>
+        Our algorithm decides - based on AI - what words fit best for your occasion and mood.<br/>
+        Additionally it generates phrases in the style of different people, your personal Ghostwriters.<br/>
+        Et voilà: a innovative greeting text !<br/>
+      </p>
+      <br/>
+
+      <h1>
+        <strong>Hybrid Approach </strong>
+      </h1>
+
+      <p style="margin-right:50px; margin-left:50px;">
+        Behind the scenes we use a combination of predefined structure and free text generation.<br/>
+        We use the Machine Learning Model FitBERT to smartly customize sentences and with the<br/>
+        help of Recurrent Neural Networks (RNN's) we provide completely new sentence creations<br/>
+      </p>
+      <br/>
+    </div>
+
+    <div *ngIf="navSelection === 'about'" class="infobox">
+      <br/>
+
+      <h1>
+        <strong>Our Team</strong>
+      </h1>
+
+      <img class="our_photos" style="margin-left: 100px;" src="assets/images/Rocket.png"/>
+      <label style="margin-right:50px; font-size:x-large; font-weight:bold">
+        Elias Dellago
+      </label>
+
+      <img class="our_photos" src="assets/images/groot.png"/>
+      <label style="margin-right: 50px; font-size: x-large; font-weight: bold">
+        David Gergess
+      </label>
+      <br/><br/>
+
+      <img class="our_photos" style="margin-left: 97px;" src="assets/images/stanlee.png"/>
+      <label style="margin-right:50px; font-size:x-large; font-weight:bold">
+        Yevhen Prots
+      </label>
+
+      <img class="our_photos" src="assets/images/gamora.png"/>
+      <label style="margin-right: 50px; font-size: x-large; font-weight: bold;">
+        Selina Weber
+      </label>
+      <br/><br/>
+
+      <p style="margin-bottom:0px;">
+        <strong>This project was realised as part of the course "Komputer und Creativität" of the Technical University Munich. <br/>
+          One aim of this course is to understand and develop computational creativity such as this software.
+        </strong>
+      </p>
+      <br/>
+    </div>
+
+    <!--Static body part-->
+    <p style="border-top:solid; border-color:white;">
+
+    </p>
+    <br/>
+
+    <img id="title_centered" src="assets/images/kctitlebold.png"/>
+    <br/>
+
+    <img id="logo_centered" src="assets/images/kclogo.png"/>
+    <br/>
+    <br/>
+    <br/>
+
+    <h1 style="font-weight:bold;">
+      <br>Select an occasion
+    </h1>
+
+    <button (click)="occasion_wedding()" id="wedding_button" class="button_occasion">
+      <span id="wedding">
+        <img class="images" src="assets/images/wedding.svg">
+      </span>
+    </button>
+
+    <button (click)="occasion_birthday()" class="button_occasion">
+      <span id="birthday">
+        <img class="images" src="assets/images/birthday.svg">
+      </span>
+    </button>
+
+    <button (click)="occasion_funeral()" class="button_occasion">
+      <span id="funeral">
+        <img class="images" src="assets/images/funeral.svg">
+      </span>
+    </button>
+
+    <button (click)="occasion_valentine()" class="button_occasion">
+      <span id="valentine ">
+        <img class="images" src="assets/images/valentines.svg">
+      </span>
+    </button>
+    <br>
+    <br>
+
+    <div style="height:1000px;">
+
+      <!--Dynamic part wedding-->
+      <div *ngIf="occasionSelection === 'wedding'">
+        <span class="selected_occasion" style="margin-top: 10px; color: #ffcc12;">
+          Wedding
+        </span>
+        <br/>
+
+        <!--left column-->
+        <div class="row" style="margin-top:10px;">
+          <div class="column" id="filter_options_column_wedding" style="background-color: #ffeeb0;">
+            <h1>
+              Mood selection
+            </h1>
+
+            <div style="display: grid; grid-template-columns: auto auto; margin-left: -75px">
+              <div id="moodContainer">
+                <img *ngIf="moodSelection === 'neutral'" style="margin-left:-50px" class="moodicon"
+                     src="assets/images/neutral.png">
+                <img *ngIf="moodSelection === 'poetic'" style="margin-left:-50px" class="moodicon"
+                     src="assets/images/poetic.png">
+                <img *ngIf="moodSelection === 'formal'" style="margin-left:-50px" class="moodicon"
+                     src="assets/images/formal.png">
+                <img *ngIf="moodSelection === 'fun'" style="margin-left:-50px" class="moodicon"
+                     src="assets/images/adventurous.png">
+              </div>
+
+              <mat-radio-group color="primary" [(ngModel)]="moodSelection" style="margin-left: -125px;">
+                <mat-radio-button class="radio_wedding" value="neutral" style="float: left">
+                  Neutral
+                </mat-radio-button>
+                <br/><br/>
+
+                <mat-radio-button class="radio_wedding" value="poetic" style="float: left; margin-top: -10px;">
+                  Poetic
+                </mat-radio-button>
+                <br/><br/>
+
+                <mat-radio-button class="radio_wedding" value="formal" style="float: left; margin-top: -20px;">
+                  Formal
+                </mat-radio-button>
+                <br/><br/>
+
+                <mat-radio-button class="radio_wedding" value="fun" style="float: left; margin-top: -30px;">
+                  Adventurous
+                </mat-radio-button>
+              </mat-radio-group>
+            </div>
+
+            <hr>
+            <h1>
+              Your perspective
+            </h1>
+
+            <mat-radio-group color="primary" [(ngModel)]="perspectiveSelection">
+              <img src="assets/images/one.svg" style="width: 10%; margin-right:5px;">
+              <mat-radio-button value="one">
+                Me
+              </mat-radio-button>
+              &nbsp;&nbsp;&nbsp;&nbsp;
+
+              <img src="assets/images/many.svg" style="width: 10%">
+              &nbsp;
+
+              <mat-radio-button value="many">
+                Us
+              </mat-radio-button>
+              <br/>
+            </mat-radio-group>
+
+            <hr>
+            <h1 style="margin-bottom: -5px;">
+              Optional Details
+            </h1>
+            <br>
+
+            <mat-form-field>
+              <mat-label>
+                Name of the groom
+              </mat-label>
+
+              <input matInput type="text" [(ngModel)]="weddingName1">
+            </mat-form-field>
+            <br>
+
+            <mat-form-field>
+              <mat-label>
+                Name of the bride
+              </mat-label>
+
+              <input matInput type="text" [(ngModel)]="weddingName2">
+            </mat-form-field>
+            <br>
+
+            <button *ngIf="!initialState" mat-raised-button style="color: #ffcc12; font-size: medium;" (click)="bertCall()">
+              <span class="material-icons" style="margin-top:-3px; margin-right:2px;">
+                restart_alt
+              </span>
+              Go again
+            </button>
+          </div>
+
+          <!--Middle column-->
+          <div class="column" id="output_test_column_wedding">
+            <div *ngIf="initialState">
+              <div style="display: grid; grid-template-columns: auto auto; grid-auto-rows: auto auto">
+                <div style="float: left;">
+                  <img class="rotateimg90" src="assets/images/fadingarrow.png">
+                </div>
+
+                <p style="font-size: 30px; align-self: center; text-align: left;">
+                  Tweak what you want your Greeting Card to look like
+                </p>
+
+                <p style="font-size: 30px; align-self: center; text-align: right;">
+                  Select an AI for additional sentence suggestions
+                </p>
+
+                <div style="float: right;">
+                  <img class="rotateimg270" src="assets/images/fadingarrow.png">
+                </div>
+              </div>
+
+              <button mat-raised-button style="font-size: 30px; margin-bottom: 10px; color: #ffcc12;"
+                      (click)="generate()">
+                <span class="material-icons" style="margin-top:-4px; margin-right:5px; font-size:30px;">
+                  play_arrow
+                </span>
+                Generate
+              </button>
+            </div>
+
+            <div *ngIf="!initialState && !loadingState && !errorState">
+              <textarea spellcheck="false" style=" background-color: #ffeeb0; overflow-y:auto;" id="output_text_area"
+                        [(ngModel)]="outputText" contenteditable>
+              </textarea>
+              <br>
+
+              <button *ngIf="!bertNoMoreOptions" mat-raised-button style="float:right; color:#ffcc12; font-size:medium;"
+                      (click)="bertRetry()">
+                <span class="material-icons">
+                  swap_horiz
+                </span>
+                Change choice of words
+              </button>
+
+              <img *ngIf="bertRetryState" style="float:right; width: 30px; margin-right: 20px"
+                   src="assets/images/loading.gif">
+              <br>
+              <br/>
+
+              <div *ngFor="let suggestionString of rnnSuggestions; let i = index">
+                <hr style = "margin: 5px">
+                <div style="display: grid; grid-template-columns: auto 200px;">
+                  <div style="place-self: center start; text-align: start">
+                    {{suggestionString}}
+                  </div>
+
+                  <div style="width: 10%; display: grid; grid-template-columns: auto auto; place-self: center center">
+                    <button mat-fab style="transform: scale(0.6); margin-right: -5px;" class="accept_button"
+                            (click)="accept(i)">
+                      <img src="assets/images/tick.svg" style="width: 26px; height: 26px;">
+                    </button>
+
+                    <button mat-fab style="transform: scale(0.6);" class="decline_button" (click)="decline(i)">
+                      <img src="assets/images/cross.svg" style="width: 20px; height: 20px;">
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <div *ngIf="maxSuggestions > rnnSuggestions.length">
+                <hr>
+                <button mat-raised-button (click)="rnnCall()"
+                        style="float: right; color: #ffcc12; font-size: medium; margin-bottom:10px;">
+                  <span class="material-icons" style="margin-top:-3px; margin-right:2px;">
+                    add_circle_outline
+                  </span>
+                  More Suggestions
+                </button>
+
+                <img *ngIf="rnnAddState" style="float:right; width: 30px; margin-right: 20px"
+                     src="assets/images/loading.gif">
+              </div>
+            </div>
+
+            <div *ngIf="loadingState">
+              <img style="border-radius: 30px" src="assets/images/tumbleweed.gif">
+              <br>
+              <br>
+
+              <h1>
+                Thinking very hard...
+              </h1>
+            </div>
+
+            <div *ngIf="errorState">
+              <img style="border-radius: 30px" src="assets/images/sadcat.jpg">
+              <br>
+              <br>
+
+              <h1>
+                Sorry, an error occured :(
+              </h1>
+            </div>
+          </div>
+
+          <!--right column-->
+          <div class="column" id="buttons_column_wedding" style="background-color: #ffeeb0;">
+            <h1>
+              Ghostwriter
+            </h1>
+
+            <div style="display: grid; grid-template-columns: auto auto">
+              <div>
+                <br/>
+
+                <img class="go_buttons" src="assets/images/shakespeare.png">
+                <br/><br/>
+
+                <img class="go_buttons" src="assets/images/jackson.png">
+                <br/><br/>
+
+                <img class="go_buttons" src="assets/images/bouquet.png">
+              </div>
+
+              <mat-radio-group color="primary" [(ngModel)]="modelSelection">
+                <br/><br/>
+               
+                <mat-radio-button value="shakespeare" style="float: left; margin-top:10px;">
+                  Shakespeare
+                </mat-radio-button>
+                <br/><br/><br/><br/><br/>
+
+                <mat-radio-button value="michaeljackson" style="float: left; margin-top: 25px;">
+                  Michael Jackson
+                </mat-radio-button>
+                <br/><br/><br/><br/><br/>
+
+                <mat-radio-button value="maidofhonor" style="float: left; margin-top: 10px;">
+                  Maid of Honor
+                  <p style="border-color: #616161; color: #616161; border-radius: 5px; border-style: solid; border-width: 1px">
+                    Recommended
+                  </p>
+                </mat-radio-button>
+              </mat-radio-group>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <!--Dynamic part Birthday-->
+      <div *ngIf="occasionSelection === 'birthday'">
+        <span class="selected_occasion" style="margin-top: 10px; color: #0077b6">
+          Birthday
+        </span>
+        <br/>
+
+        <!--left column-->
+        <div class="row" style="margin-top:10px;">
+          <div class="column" style="background-color: #caf0f8;" id="filter_options_column_birthday">
+            <h1>
+              Mood selection
+            </h1>
+
+            <div style="display: grid; grid-template-columns: auto auto; margin-left: -75px">
+              <div id="moodContainer">
+                <img *ngIf="moodSelection === 'neutral'" style="margin-left:-50px" class="moodicon"
+                     src="assets/images/neutral.png">
+                <img *ngIf="moodSelection === 'poetic'" style="margin-left:-50px" class="moodicon"
+                     src="assets/images/poetic.png">
+                <img *ngIf="moodSelection === 'formal'" style="margin-left:-50px" class="moodicon"
+                     src="assets/images/formal.png">
+                <img *ngIf="moodSelection === 'fun'" style="margin-left:-50px" class="moodicon"
+                     src="assets/images/adventurous.png">
+              </div>
+
+              <mat-radio-group color="primary" [(ngModel)]="moodSelection" style="margin-left: -125px">
+                <mat-radio-button value="neutral" style="float: left">
+                  Neutral
+                </mat-radio-button>
+                <br/><br/>
+
+                <mat-radio-button value="poetic" style="float: left; margin-top: -10px;">
+                  Poetic
+                </mat-radio-button>
+                <br/><br/>
+
+                <mat-radio-button value="formal" style="float: left; margin-top: -20px;">
+                  Formal
+                </mat-radio-button>
+                <br/><br/>
+
+                <mat-radio-button value="fun" style="float: left; margin-top: -30px;">
+                  Adventurous
+                </mat-radio-button>
+              </mat-radio-group>
+            </div>
+
+            <hr>
+            <h1>
+              Your perspective
+            </h1>
+
+            <mat-radio-group color="primary" [(ngModel)]="perspectiveSelection">
+              <img src="assets/images/one.svg" style="width: 10%; margin-right: 5px;">
+              <mat-radio-button value="one">
+                Me
+              </mat-radio-button>
+              &nbsp;&nbsp;&nbsp;&nbsp;
+
+              <img src="assets/images/many.svg" style="width: 10%">
+              &nbsp;
+
+              <mat-radio-button value="many">
+                Us
+              </mat-radio-button>
+              <br/>
+            </mat-radio-group>
+
+            <hr>
+            <h1 style="margin-bottom: -5px;">
+              Optional Details
+            </h1>
+            <br>
+
+            <mat-form-field>
+              <mat-label>
+                To whom?
+              </mat-label>
+
+              <input matInput type="text" [(ngModel)]="birthdayName">
+            </mat-form-field>
+            <br>
+
+            <mat-form-field>
+              <mat-label>
+                Age
+              </mat-label>
+              <input matInput type="number" [(ngModel)]="birthdayAge">
+            </mat-form-field>
+            <br>
+
+            <button *ngIf="!initialState" mat-raised-button style="color: #0077b6; font-size: medium;" (click)="bertCall()">
+              <span class="material-icons" style="margin-top:-3px; margin-right:2px;">
+                restart_alt
+              </span>
+              Go again
+            </button>
+          </div>
+
+          <!--middle column-->
+          <div class="column" id="output_test_column_birthday">
+            <div *ngIf="initialState">
+              <div style="display: grid; grid-template-columns: auto auto; grid-auto-rows: auto auto">
+                <div style="float: left;">
+                  <img class="rotateimg90" src="assets/images/fadingarrow.png">
+                </div>
+
+                <p style="font-size: 30px; align-self: center; text-align: left;">
+                  Tweak what you want your Greeting Card to look like
+                </p>
+
+                <p style="font-size: 30px; align-self: center; text-align: right;">
+                  Select an AI for additional sentence suggestions
+                </p>
+
+                <div style="float: right;">
+                  <img class="rotateimg270" src="assets/images/fadingarrow.png">
+                </div>
+              </div>
+
+              <button mat-raised-button style="font-size: 30px; margin-bottom:10px; color:#0077b6" (click)="generate()">
+                <span class="material-icons" style="margin-top:-4px; margin-right:5px; font-size:30px;">
+                  play_arrow
+                </span>
+                Generate
+              </button>
+            </div>
+
+            <div *ngIf="!initialState && !loadingState && !errorState">
+              <textarea spellcheck="false" style="background-color: #caf0f8; overflow-y: auto;" id="output_text_area"
+                        [(ngModel)]="outputText" contenteditable>
+              </textarea>
+              <br>
+
+              <button *ngIf="!bertNoMoreOptions" mat-raised-button style="float: right; color: #0077b6; font-size: medium;"
+                      (click)="bertRetry()">
+                <span class="material-icons">
+                  swap_horiz
+                </span>
+                Change choice of words
+              </button>
+              <img *ngIf="bertRetryState" style="float:right; width: 30px; margin-right: 20px"
+                   src="assets/images/loading.gif">
+              <br>
+              <br/>
+
+              <div *ngFor="let suggestionString of rnnSuggestions; let i = index">
+                <hr style = "margin: 5px">
+                <div style="display: grid; grid-template-columns: auto 200px;">
+                  <div style="place-self: center start; text-align: start">
+                    {{suggestionString}}
+                  </div>
+
+                  <div style="width: 10%; display: grid; grid-template-columns: auto auto; place-self: center center">
+                    <button mat-fab style="transform: scale(0.6); margin-right: -5px;" class="accept_button"
+                            (click)="accept(i)">
+                      <img src="assets/images/tick.svg" style="width: 26px; height: 26px;">
+                    </button>
+
+                    <button mat-fab style="transform: scale(0.6);" class="decline_button" (click)="decline(i)">
+                      <img src="assets/images/cross.svg" style="width: 20px; height: 20px;">
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <div *ngIf="maxSuggestions > rnnSuggestions.length">
+                <hr>
+                <button mat-raised-button (click)="rnnCall()"
+                        style="float: right; color: #0077b6; font-size: medium; margin-bottom: 10px;">
+                  <span class="material-icons" style="margin-top:-3px; margin-right:2px;">
+                    add_circle_outline
+                  </span>
+                  More Suggestions!
+                </button>
+
+                <img *ngIf="rnnAddState" style="float:right; width: 30px; margin-right: 20px"
+                     src="assets/images/loading.gif">
+              </div>
+            </div>
+
+            <div *ngIf="loadingState">
+              <img style="border-radius: 30px" src="assets/images/tumbleweed.gif">
+              <br>
+              <br>
+
+              <h1>
+                Thinking very hard...
+              </h1>
+            </div>
+
+            <div *ngIf="errorState">
+              <img style="border-radius: 30px" src="assets/images/sadcat.jpg">
+              <br>
+              <br>
+
+              <h1>
+                Sorry, an error occured :(
+              </h1>
+            </div>
+          </div>
+
+          <!--right column-->
+          <div class="column" style="background-color:#caf0f8;" id="buttons_column_wedding">
+            <h1>
+              Ghostwriter
+            </h1>
+
+            <div style="display: grid; grid-template-columns: auto auto">
+              <div>
+                <br/>
+
+                <img class="go_buttons" src="assets/images/shakespeare.png">
+                <br/><br/>
+
+                <img class="go_buttons" src="assets/images/jackson.png">
+                <br/><br/>
+
+                <img class="go_buttons" src="assets/images/bouquet.png">
+              </div>
+
+              <mat-radio-group color="primary" [(ngModel)]="modelSelection">
+                <br/><br/>
+
+                <mat-radio-button value="shakespeare" style="float: left">
+                  Shakespeare
+                  <p style="border-color: #616161; color: #616161; border-radius: 5px; border-style: solid; border-width: 1px">
+                    Recommended
+                  </p>
+                </mat-radio-button>
+                <br/><br/><br/><br/><br/>
+
+                <mat-radio-button value="michaeljackson" style=" float: left; margin-top: 25px;">
+                  Michael Jackson
+                </mat-radio-button>
+                <br/><br/><br/><br/><br/>
+
+                <mat-radio-button value="maidofhonor" style="float: left; margin-top: 25px;">
+                  Maid of Honor
+                </mat-radio-button>
+              </mat-radio-group>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!--Dynamic Part: Funeral-->
+      <div *ngIf="occasionSelection === 'funeral'">
+        <span class="selected_occasion" style="margin-top: 10px; color: #998c83;">
+          Funeral
+        </span>
+        <br/>
+
+        <!--left column-->
+        <div class="row" style="margin-top:10px;">
+          <div class="column" style="background-color: #d5d0cd;" id="filter_options_column_birthday">
+            <h1>
+              Mood selection
+            </h1>
+
+            <div style="display: grid; grid-template-columns: auto auto; margin-left: -75px">
+              <div id="moodContainer">
+                <img *ngIf="moodSelection === 'neutral'" style="margin-left:-50px" class="moodicon"
+                     src="assets/images/neutral.png">
+                <img *ngIf="moodSelection === 'poetic'" style="margin-left:-50px" class="moodicon"
+                     src="assets/images/poetic.png">
+                <img *ngIf="moodSelection === 'formal'" style="margin-left:-50px" class="moodicon"
+                     src="assets/images/formal.png">
+                <img *ngIf="moodSelection === 'fun'" style="margin-left:-50px" class="moodicon"
+                     src="assets/images/adventurous.png">
+              </div>
+
+              <mat-radio-group color="primary" [(ngModel)]="moodSelection" style="margin-left: -125px">
+                <mat-radio-button value="neutral" style="float: left">
+                  Neutral
+                </mat-radio-button>
+                <br/><br/>
+
+                <mat-radio-button value="poetic" style="float: left; margin-top: -10px;">
+                  Poetic
+                </mat-radio-button>
+                <br/><br/>
+
+                <mat-radio-button value="formal" style="float: left; margin-top: -20px;">
+                  Formal
+                </mat-radio-button>
+                <br/><br/>
+
+                <mat-radio-button value="fun" style="float: left; margin-top: -30px;">
+                  Adventurous
+                </mat-radio-button>
+              </mat-radio-group>
+            </div>
+
+            <hr>
+            <h1>
+              Your perspective
+            </h1>
+
+            <mat-radio-group color="primary" [(ngModel)]="perspectiveSelection">
+              <img src="assets/images/one.svg" style="width: 10%; margin-right:5px;">
+              <mat-radio-button value="one">
+                Me
+              </mat-radio-button>
+              &nbsp;&nbsp;&nbsp;&nbsp;
+
+              <img src="assets/images/many.svg" style="width: 10%">
+              &nbsp;
+
+              <mat-radio-button value="many">
+                Us
+              </mat-radio-button>
+              <br/>
+            </mat-radio-group>
+
+            <hr>
+            <h1 style="margin-bottom: -5px;">
+              Optional Details
+            </h1>
+            <br>
+
+            <mat-form-field>
+              <mat-label>
+                To whom?
+              </mat-label>
+              <input matInput type="text" [(ngModel)]="funeralName1">
+            </mat-form-field>
+            <br>
+
+            <mat-form-field>
+              <mat-label>
+                Name of the deceased
+              </mat-label>
+
+              <input matInput type="text" [(ngModel)]="funeralName2">
+            </mat-form-field>
+            <br>
+
+            <mat-radio-group color="primary" [(ngModel)]="funeralGender" style="width: 50%">
+              <img src="assets/images/female.svg" style="width: 7%; margin-top:-5px;">
+              <mat-radio-button value="female">
+                Female
+              </mat-radio-button>
+              &nbsp;&nbsp;&nbsp;&nbsp;
+
+              <img src="assets/images/male.svg" style="width: 6%; margin-top:-5px; margin-right:-6px;">
+              &nbsp;
+
+              <mat-radio-button value="male">
+                Male
+              </mat-radio-button>
+              <br/>
+            </mat-radio-group>
+            <br>
+
+            <button *ngIf="!initialState" mat-raised-button style="color: #998c83; font-size: medium;" (click)="bertCall()">
+              <span class="material-icons" style="margin-top:-3px; margin-right:2px;">
+                restart_alt
+              </span>
+              Go again
+            </button>
+          </div>
+
+          <!--middle column-->
+          <div class="column" id="output_test_column_funeral">
+            <div *ngIf="initialState">
+              <div style="display: grid; grid-template-columns: auto auto; grid-auto-rows: auto auto">
+                <div style="float: left;">
+                  <img class="rotateimg90" src="assets/images/fadingarrow.png">
+                </div>
+
+                <p style="font-size: 30px; align-self: center; text-align: left;">
+                  Tweak what you want your Greeting Card to look like
+                </p>
+
+                <p style="font-size: 30px; align-self: center; text-align: right;">
+                  Select an AI for additional sentence suggestions
+                </p>
+
+                <div style="float: right;">
+                  <img class="rotateimg270" src="assets/images/fadingarrow.png">
+                </div>
+              </div>
+
+              <button mat-raised-button style="font-size: 30px; margin-bottom:10px; color:#998c83" (click)="generate()">
+                <span class="material-icons" style="margin-top:-4px; margin-right:5px; font-size:30px;">
+                  play_arrow
+                </span>
+                Generate
+              </button>
+            </div>
+
+            <div *ngIf="!initialState && !loadingState && !errorState">
+              <textarea spellcheck="false" style="background-color: #d5d0cd; overflow-y: auto;" id="output_text_area"
+                        [(ngModel)]="outputText" contenteditable>
+              </textarea>
+              <br>
+
+              <button *ngIf="!bertNoMoreOptions" mat-raised-button style="float: right; color: #998c83; font-size: medium;"
+                      (click)="bertRetry()">
+                <span class="material-icons">
+                  swap_horiz
+                </span>
+                Change choice of words
+              </button>
+
+              <img *ngIf="bertRetryState" style="float:right; width: 30px; margin-right: 20px"
+                   src="assets/images/loading.gif">
+              <br/>
+              <br>
+
+              <div *ngFor="let suggestionString of rnnSuggestions; let i = index">
+                <hr style = "margin: 5px">
+                <div style="display: grid; grid-template-columns: auto 200px;">
+                  <div style="place-self: center start; text-align: start">
+                    {{suggestionString}}
+                  </div>
+
+                  <div style="width: 10%; display: grid; grid-template-columns: auto auto; place-self: center center">
+                    <button mat-fab style="transform: scale(0.6); margin-right: -5px;" class="accept_button"
+                            (click)="accept(i)">
+                      <img src="assets/images/tick.svg" style="width: 26px; height: 26px;">
+                    </button>
+
+                    <button mat-fab style="transform: scale(0.6);" class="decline_button" (click)="decline(i)">
+                      <img src="assets/images/cross.svg" style="width: 20px; height: 20px;">
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <div *ngIf="maxSuggestions > rnnSuggestions.length">
+                <hr>
+                <button mat-raised-button (click)="rnnCall()"
+                        style="float: right; color: #998c83; font-size: medium; margin-bottom: 10px;">
+                  <span class="material-icons" style="margin-top:-3px; margin-right:2px;">
+                    add_circle_outline
+                  </span>
+                  More Suggestions!
+                </button>
+
+                <img *ngIf="rnnAddState" style="float:right; width: 30px; margin-right: 20px"
+                     src="assets/images/loading.gif">
+              </div>
+            </div>
+
+            <div *ngIf="loadingState">
+              <img style="border-radius: 30px" src="assets/images/tumbleweed.gif">
+              <br>
+              <br>
+
+              <h1>
+                Thinking very hard...
+              </h1>
+            </div>
+
+            <div *ngIf="errorState">
+              <img style="border-radius: 30px" src="assets/images/sadcat.jpg">
+              <br>
+              <br>
+
+              <h1>
+                Sorry, an error occured :(
+              </h1>
+            </div>
+          </div>
+
+          <!--right column-->
+          <div class="column" style="    background-color: #d5d0cd;" id="buttons_column_wedding">
+            <h1>
+              Ghostwriter
+            </h1>
+
+            <div style="display: grid; grid-template-columns: auto auto">
+              <div>
+                <br/>
+
+                <img class="go_buttons" src="assets/images/shakespeare.png">
+                <br/><br/>
+
+                <img class="go_buttons" src="assets/images/jackson.png">
+                <br/><br/>
+
+                <img class="go_buttons" src="assets/images/bouquet.png">
+              </div>
+
+              <mat-radio-group color="primary" [(ngModel)]="modelSelection">
+                <br/><br/>
+
+                <mat-radio-button value="shakespeare" style="float: left">
+                  Shakespeare
+                  <p style="border-color: #616161; color: #616161; border-radius: 5px; border-style: solid; border-width: 1px">
+                    Recommended
+                  </p>
+                </mat-radio-button>
+                <br/><br/><br/><br/><br/>
+
+                <mat-radio-button value="michaeljackson" style="margin-top: 25px; float: left;">
+                  Michael Jackson
+                </mat-radio-button>
+                <br/><br/><br/><br/><br/>
+
+                <mat-radio-button value="maidofhonor" style="float: left; margin-top: 25px;">
+                  Maid of Honor
+                </mat-radio-button>
+              </mat-radio-group>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!--Dynamic Part Valentines-->
+      <div *ngIf="occasionSelection === 'valentines'">
+        <span class="selected_occasion" style="margin-top: 10px; color: #dd3f5b">Valentine's Day</span>
+        <br/>
+
+        <div class="row" style="margin-top:10px;">
+          <div class="column" style="background-color: #ffcad4;" id="filter_options_column_birthday">
+            <h1>
+              Mood selection
+            </h1>
+
+            <div style="display: grid; grid-template-columns: auto auto; margin-left: -75px">
+              <div id="moodContainer">
+                <img *ngIf="moodSelection === 'neutral'" style="margin-left:-50px" class="moodicon"
+                     src="assets/images/neutral.png">
+                <img *ngIf="moodSelection === 'poetic'" style="margin-left:-50px" class="moodicon"
+                     src="assets/images/poetic.png">
+                <img *ngIf="moodSelection === 'formal'" style="margin-left:-50px" class="moodicon"
+                     src="assets/images/formal.png">
+                <img *ngIf="moodSelection === 'fun'" style="margin-left:-50px" class="moodicon"
+                     src="assets/images/adventurous.png">
+              </div>
+
+              <mat-radio-group color="primary" [(ngModel)]="moodSelection" style="margin-left: -125px">
+                <mat-radio-button value="neutral" style="float: left">
+                  Neutral
+                </mat-radio-button>
+                <br/><br/>
+
+                <mat-radio-button value="poetic" style="float: left; margin-top: -10px;">
+                  Poetic
+                </mat-radio-button>
+                <br/><br/>
+
+                <mat-radio-button value="formal" style="float: left; margin-top: -20px;">
+                  Formal
+                </mat-radio-button>
+                <br/><br/>
+
+                <mat-radio-button value="fun" style="float: left; margin-top: -30px;">
+                  Adventurous
+                </mat-radio-button>
+              </mat-radio-group>
+            </div>
+
+            <hr>
+            <h1>
+              Your perspective
+            </h1>
+
+            <mat-radio-group color="primary" [(ngModel)]="perspectiveSelection">
+              <img src="assets/images/one.svg" style="width: 10%; margin-right:5px;">
+              <mat-radio-button value="one">
+                Me
+              </mat-radio-button>
+              &nbsp;&nbsp;&nbsp;&nbsp;
+
+              <img src="assets/images/many.svg" style="width: 10%">
+              &nbsp;
+
+              <mat-radio-button value="many">
+                Us
+              </mat-radio-button>
+              <br/>
+            </mat-radio-group>
+
+            <hr>
+            <h1 style="margin-bottom: -5px;">
+              Optional Details
+            </h1>
+            <br>
+
+            <mat-form-field>
+              <mat-label>
+                To whom?
+              </mat-label>
+              <input matInput type="text" [(ngModel)]="valentinesName">
+            </mat-form-field>
+            <br>
+
+            <button *ngIf="!initialState" mat-raised-button style="color: #dd3f5b; font-size: medium;" (click)="bertCall()">
+              <span class="material-icons" style="margin-top:-3px; margin-right:2px;">
+                restart_alt
+              </span>
+              Go again
+            </button>
+          </div>
+
+          <!--middle column-->
+          <div class="column" id="output_test_column_valentine">
+            <div *ngIf="initialState">
+              <div style="display: grid; grid-template-columns: auto auto; grid-auto-rows: auto auto">
+                <div style="float: left;">
+                  <img class="rotateimg90" src="assets/images/fadingarrow.png">
+                </div>
+
+                <p style="font-size: 30px; align-self: center; text-align: left;">
+                  Tweak what you want your Greeting Card to look like
+                </p>
+
+                <p style="font-size: 30px; align-self: center; text-align: right;">
+                  Select an AI for additional sentence suggestions
+                </p>
+
+                <div style="float: right;">
+                  <img class="rotateimg270" src="assets/images/fadingarrow.png">
+                </div>
+              </div>
+
+              <button mat-raised-button style="font-size: 30px; margin-bottom:30px; color:#dd3f5b" (click)="generate()">
+                <span class="material-icons" style="margin-top:-4px; margin-right:5px; font-size:30px;">
+                  play_arrow
+                </span>
+                Generate
+              </button>
+              <br/>
+            </div>
+
+            <div *ngIf="!initialState && !loadingState && !errorState">
+              <textarea spellcheck="false" style="background-color: #ffcad4; overflow-y: auto;" id="output_text_area"
+                        [(ngModel)]="outputText" contenteditable>
+              </textarea>
+              <br>
+
+              <button *ngIf="!bertNoMoreOptions" mat-raised-button style="float: right; color: #dd3f5b; font-size: medium;"
+                      (click)="bertRetry()">
+                <span class="material-icons">
+                  swap_horiz
+                </span>
+                Change choice of words
+              </button>
+
+              <img *ngIf="bertRetryState" style="float:right; width: 30px; margin-right: 20px"
+                   src="assets/images/loading.gif">
+              <br/>
+              <br/>
+
+              <div *ngFor="let suggestionString of rnnSuggestions; let i = index">
+                <hr style = "margin: 5px">
+                <div style="display: grid; grid-template-columns: auto 200px;">
+                  <div style="place-self: center start; text-align: start">
+                    {{suggestionString}}
+                  </div>
+
+                  <div style="width: 10%; display: grid; grid-template-columns: auto auto; place-self: center center">
+                    <button mat-fab style="transform: scale(0.6); margin-right: -5px;" class="accept_button"
+                            (click)="accept(i)">
+                      <img src="assets/images/tick.svg" style="width: 26px; height: 26px;">
+                    </button>
+
+                    <button mat-fab style="transform: scale(0.6);" class="decline_button" (click)="decline(i)">
+                      <img src="assets/images/cross.svg" style="width: 20px; height: 20px;">
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <div *ngIf="maxSuggestions > rnnSuggestions.length">
+                <hr>
+                <button mat-raised-button (click)="rnnCall()"
+                        style=" float: right; color: #dd3f5b; font-size: medium; margin-bottom:10px;">
+                  <span class="material-icons" style="margin-top:-3px; margin-right:2px;">
+                    add_circle_outline
+                  </span>
+                  More Suggestions!
+                </button>
+
+                <img *ngIf="rnnAddState" style="float:right; width: 30px; margin-right: 20px"
+                     src="assets/images/loading.gif">
+              </div>
+            </div>
+
+            <div *ngIf="loadingState">
+              <img style="border-radius: 30px" src="assets/images/tumbleweed.gif">
+              <br>
+              <br>
+
+              <h1>
+                Thinking very hard...
+              </h1>
+            </div>
+
+            <div *ngIf="errorState">
+              <img style="border-radius: 30px" src="assets/images/sadcat.jpg">
+              <br>
+              <br>
+
+              <h1>
+                Sorry, an error occured :(
+              </h1>
+            </div>
+          </div>
+
+          <!--Right column-->
+          <div class="column" style="    background-color: #ffcad4;" id="buttons_column_wedding">
+            <h1>
+              Ghostwriter
+            </h1>
+
+            <div style="display: grid; grid-template-columns: auto auto">
+              <div>
+                <br/>
+
+                <img class="go_buttons" src="assets/images/shakespeare.png">
+                <br/><br/>
+
+                <img class="go_buttons" src="assets/images/jackson.png">
+                <br/><br/>
+
+                <img class="go_buttons" src="assets/images/bouquet.png">
+              </div>
+
+              <mat-radio-group color="primary" [(ngModel)]="modelSelection">
+                <br/><br/>
+
+                <mat-radio-button value="shakespeare" style="float: left">
+                  Shakespeare
+                </mat-radio-button>
+                <br/><br/><br/><br/><br/>
+
+                <mat-radio-button value="michaeljackson" style="float: left; margin-top: 25px;">
+                  Michael Jackson
+                  <p style="border-color: #616161; color: #616161; border-radius: 5px; border-style: solid; border-width: 1px">
+                    Recommended
+                  </p>
+                </mat-radio-button>
+                <br/><br/><br/><br/><br/>
+
+                <mat-radio-button value="maidofhonor" style=" float: left; margin-top: 25px;">
+                  Maid of Honor
+                </mat-radio-button>
+              </mat-radio-group>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,15 @@
+version: '3.3'
+
+services:
+  frontend:
+    image: ww_frontend
+    restart: always
+    container_name: ww_frontend
+    ports:
+    - 8080:8080
+  backend:
+    image: ww_backend
+    restart: always
+    container_name: ww_backend
+    ports:
+    - 5000:5000
