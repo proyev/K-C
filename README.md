@@ -6,7 +6,7 @@ _____________
 
 # Overview
 
-Developed as a final project for the course Komputer&Creativität(no spelling errors here) at TUM.
+Developed as a final project for the course Komputer&Creativität(no spelling errors here) @ TUM.
 
 * [frontend/](./frontend) contains the Angular Web-App Source files
 * [frontend/dist/frontend](./frontend/dist/frontend) contains the compiled static files for use in a Docker contanier
